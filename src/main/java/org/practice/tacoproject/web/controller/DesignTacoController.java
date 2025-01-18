@@ -2,6 +2,8 @@ package org.practice.tacoproject.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.practice.tacoproject.entity.Ingredient;
+import org.practice.tacoproject.repository.IngredientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @SessionAttributes("tacoOrder")
 
 public class DesignTacoController {
+
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
         List<Ingredient> ingredients = Arrays.asList(
