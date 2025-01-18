@@ -1,5 +1,6 @@
 package org.practice.tacoproject.web.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.practice.tacoproject.entity.Ingredient;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +10,7 @@ import org.practice.tacoproject.entity.TacoOrder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Slf4j
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("tacoOrder")
@@ -56,7 +57,7 @@ public class DesignTacoController {
     public String processTaco(Taco taco,
                               @ModelAttribute TacoOrder tacoOrder) {
         tacoOrder.addTaco(taco);
-
+        log.info("Processing taco: {}", taco);
         return "redirect:/orders/current";
     }
 
