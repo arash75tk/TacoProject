@@ -26,6 +26,7 @@ public class TacoOrder implements Serializable {
     private String ccCVV;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
     private List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {

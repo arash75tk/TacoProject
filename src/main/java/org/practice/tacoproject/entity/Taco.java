@@ -15,9 +15,9 @@ public class Taco {
     private Long id;
     private Date createdAt = new Date();
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "tacoOrderId", referencedColumnName = "id")
-    private TacoOrder order;
+//    @ManyToOne
+//    @JoinColumn(name = "tacoOrderId", referencedColumnName = "id")
+//    private TacoOrder order;
 
     @ManyToMany
     private List<Ingredient> ingredients = new ArrayList<>();
