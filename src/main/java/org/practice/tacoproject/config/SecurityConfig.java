@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,7 +14,7 @@ import org.practice.tacoproject.entity.User;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
+
 public class SecurityConfig {
 
     @Bean
@@ -35,10 +36,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/design", "/orders").hasRole("USER")
-                        .requestMatchers("/design", "/orders").permitAll()
+                        .requestMatchers("/design", "/orders" , "/orders/current").hasRole("USER")
+                        .requestMatchers("/", "/**" , "/h2-console" , "jdbc:h2:~/test" ).permitAll()
                 )
+                .csrf(u->u.ignoringRequestMatchers("/h2-console/**"))
+                .headers(h->h.frameOptions(f->f.sameOrigin()))
                 .formLogin(s-> s.loginPage("/login").defaultSuccessUrl("/design"))
+                .csrf(c->c.disable())
                 .build();
     }
 }
